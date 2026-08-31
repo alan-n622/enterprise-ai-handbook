@@ -462,3 +462,41 @@ Authentication and authorization define the boundaries within which the AI opera
 - The LLM owns reasoning and explanation.
 - A planner can improve both security and efficiency by limiting the tools available to the LLM.
 - Enterprise AI systems should expose capabilities, not infrastructure.
+
+# AI-Friendly APIs
+
+Traditional enterprise APIs are typically designed for applications or human developers.
+
+Examples include:
+
+- Retrieve shipment
+- Retrieve tracking history
+- Retrieve carrier response
+- Retrieve processing events
+
+These APIs work well when application code is responsible for orchestrating multiple service calls.
+
+AI systems have a different requirement.
+
+Rather than exposing many low-level APIs directly to the LLM, it is often preferable to expose a smaller set of higher-level business capabilities.
+
+For example:
+
+Instead of:
+
+- getShipment()
+- getTrackingHistory()
+- getCarrierDecision()
+- getProcessingEvents()
+
+An AI application may expose:
+
+- getShipmentInvestigationEvidence()
+
+Internally, this capability may call multiple existing enterprise APIs and normalize the results into a single evidence object.
+
+The LLM reasons over the normalized evidence rather than orchestrating numerous low-level service calls.
+
+This approach reduces complexity, improves consistency, and allows existing enterprise APIs to remain unchanged.
+
+In many cases, Tool Calling introduces a capability layer rather than replacing existing enterprise services.
